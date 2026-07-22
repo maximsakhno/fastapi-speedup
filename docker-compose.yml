@@ -1,0 +1,36 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: speedup-postgres
+    environment:
+      POSTGRES_USER: speedup-fastapi
+      POSTGRES_PASSWORD: speedup-fastapi
+      POSTGRES_DB: speedup-fastapi
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    command:
+      - postgres
+      - -c
+      - max_connections=256
+      # При желании можно также поднять shared_buffers для производительности
+      # - -c
+      # - shared_buffers=256MB
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U speedup-fastapi -d speedup-fastapi"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  sentry-mock:
+    image: python:3.12-slim
+    command: python3 /app/sentry_mock_server.py
+    volumes:
+      - ./sentry_mock_server.py:/app/sentry_mock_server.py:ro
+    ports:
+      - "9000:9000"
+
+volumes:
+  postgres_data:

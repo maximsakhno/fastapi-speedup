@@ -1,0 +1,27 @@
+[project]
+name = "fastapi-speedup"
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "asyncpg>=0.31.0",
+    "django>=6.0.7",
+    "faker>=40.13.0",
+    "fastapi>=0.135.2",
+    "multidict>=6.7.1",
+    "peewee>=4.2.3",
+    "piccolo>=1.35.0",
+    "psycopg2-binary>=2.9.12",
+    "psycopg[binary]>=3.3.4",
+    "py-spy>=0.4.2",
+    "pydantic-settings>=2.13.1",
+    "sentry-sdk>=2.57.0",
+    "sqlalchemy[asyncio]>=2.0.48",
+    "starlette>=1.0.0",
+    "tortoise-orm>=1.1.7",
+    "uvicorn[standard]>=0.42.0",
+    "wireup>=2.9.0",
+    "yappi>=1.7.6",
+]
+[tool.ruff]
+line-length = 119
